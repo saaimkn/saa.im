@@ -21,20 +21,30 @@ main {
 
 .sign { color: rgba(255, 255, 255, .55); }
 
-/* ---- links: quiet underline, soft highlight on hover/tap ---- */
+/* ---- links: quiet underline; hover = the saga search-bar shimmer sweep ----
+   underline is a border (text-decoration can't reach the inline-block char
+   spans the shimmer needs), and the block highlight stays neutral so the
+   rainbow reads on top of it */
 a {
   color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1px;
-  border-radius: 3px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 3px 3px 0 0;
   transition: background-color .15s ease, box-shadow .15s ease;
 }
 a:hover, a:focus-visible, a:active {
-  background-color: rgba(255, 45, 15, .32);
-  box-shadow: 0 0 0 3px rgba(255, 45, 15, .32);
-  text-decoration-color: transparent;
+  background-color: rgba(255, 255, 255, .08);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .08);
   outline: none;
+}
+a .ch { display: inline-block; }
+a.sweep .ch {
+  animation: chsweep .55s ease-in-out;
+  animation-delay: var(--d);
+}
+@keyframes chsweep {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-3px); color: var(--c); }
 }
 
 /* ---- mini inline icons ---- */
@@ -59,4 +69,5 @@ footer .dot { color: rgba(255, 255, 255, .35); margin: 0 .5em; }
 
 @media (prefers-reduced-motion: reduce) {
   a { transition: none; }
+  a.sweep .ch { animation: none; }
 }

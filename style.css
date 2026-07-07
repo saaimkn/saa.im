@@ -1,0 +1,108 @@
+/* saa.im */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: #000;
+  color: #d6d6d6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+}
+::selection { background: rgba(255, 45, 15, .55); color: #fff; }
+
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 14vh 28px 12vh;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #f2f2f2;
+  margin: 0 0 1.4rem;
+  letter-spacing: -0.01em;
+}
+p { margin: 0 0 1.15rem; }
+.lead { color: #ececec; margin-bottom: .35rem; }
+.lead + .lead { margin-bottom: 1.6rem; }
+.smile { margin-top: 1.8rem; }
+.sign { color: #8a8a8a; }
+
+/* ---- mascot ---- */
+#mascot {
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0 0 2.4rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+#mascot .blob-mascot {
+  width: 72px;
+  height: 72px;
+  display: block;
+  animation: bob 5.5s ease-in-out infinite;
+}
+#mascot:hover .blob-mascot { animation: boing .6s ease-in-out; }
+#mascot.boing .blob-mascot { animation: boing .6s ease-in-out; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-7px) rotate(3deg); }
+}
+@keyframes boing {
+  0%   { transform: scale(1, 1); }
+  25%  { transform: scale(1.14, .86) rotate(-5deg); }
+  50%  { transform: scale(.9, 1.12) rotate(4deg); }
+  70%  { transform: scale(1.06, .94); }
+  100% { transform: scale(1, 1); }
+}
+
+/* ---- links: hover-highlight blocks ---- */
+a.hl {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, .3);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: -2px -5px;
+  transition: background-color .16s ease, text-decoration-color .16s ease;
+}
+a.hl:hover, a.hl:focus-visible, a.hl:active {
+  background-color: rgba(255, 45, 15, .3);
+  text-decoration-color: transparent;
+  outline: none;
+}
+
+/* ---- mini inline icons ---- */
+.icon {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+  vertical-align: -0.13em;
+  margin-right: .34em;
+}
+.i-england { height: .78em; vertical-align: -0.05em; }
+.i-ggb { height: .85em; vertical-align: -0.06em; }
+.tag { white-space: nowrap; }
+
+footer {
+  margin-top: 4.5rem;
+  font-size: 14px;
+  color: #666;
+}
+footer a.hl {
+  color: #8f8f8f;
+  text-decoration-color: rgba(255, 255, 255, .18);
+}
+footer a.hl:hover { color: #fff; }
+footer .dot { margin: 0 .6em; }
+
+@media (prefers-reduced-motion: reduce) {
+  #mascot .blob-mascot, #mascot:hover .blob-mascot, #mascot.boing .blob-mascot { animation: none; }
+  a.hl { transition: none; }
+}

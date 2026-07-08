@@ -32,22 +32,3 @@ document.querySelectorAll('a').forEach((a) => {
   a.addEventListener('mouseenter', sweep);
   a.addEventListener('touchstart', sweep, { passive: true });
 });
-
-// saga blob: one full ~4.5s trip around the screen per hover/tap.
-// driven by a class (not :hover) so it plays to completion even if the
-// pointer leaves, and never loops.
-const saga = document.querySelector('.saga');
-const blob = saga && saga.querySelector('svg');
-if (saga && blob) {
-  let zooming = false;
-  const go = () => {
-    if (zooming || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    zooming = true;
-    blob.classList.add('zoom');
-  };
-  blob.addEventListener('animationend', (e) => {
-    if (e.animationName === 'zoomaround') { blob.classList.remove('zoom'); zooming = false; }
-  });
-  saga.addEventListener('mouseenter', go);
-  saga.addEventListener('touchstart', go, { passive: true });
-}

@@ -79,13 +79,6 @@ a.sweep .ch {
   transform-origin: 50% 100%;          /* idle bounce grows from its feet */
   animation: idlehop 3.4s ease-in-out 2.5s infinite;
 }
-/* hover/tap triggers ONE ~4.5s trip around the screen (script adds .zoom).
-   it runs to completion even after the pointer leaves, then settles home */
-.saga svg.zoom {
-  transform-origin: 50% 50%;
-  animation: zoomaround 4.5s ease-in-out;
-}
-
 /* peek up from hiding, climb, overshoot, squash-land, settle (runs once) */
 @keyframes climb {
   0%   { transform: translateY(65%) scale(0);              opacity: 0; }
@@ -103,19 +96,6 @@ a.sweep .ch {
   90% { transform: translateY(4%)  scaleX(1.08) scaleY(.92); }  /* land */
   96% { transform: translateY(-3%) scale(1.02); }
 }
-/* whizz around the viewport and return home; loops while hovered.
-   rotation ends at 1080deg (= 0 visually) so each loop is seamless */
-@keyframes zoomaround {
-  0%   { transform: translate(0, 0)         scale(1)   rotate(0deg); }
-  12%  { transform: translate(38vw, -18vh)  scale(2.4) rotate(140deg); }
-  28%  { transform: translate(-34vw, 13vh)  scale(2)   rotate(300deg); }
-  44%  { transform: translate(31vw, 21vh)   scale(2.6) rotate(470deg); }
-  60%  { transform: translate(-30vw, -15vh) scale(2)   rotate(640deg); }
-  76%  { transform: translate(23vw, 14vh)   scale(2.4) rotate(820deg); }
-  90%  { transform: translate(-12vw, -7vh)  scale(1.6) rotate(980deg); }
-  100% { transform: translate(0, 0)         scale(1)   rotate(1080deg); }
-}
-
 footer {
   margin-top: 40px;
   font-size: 13px;
@@ -128,8 +108,8 @@ footer .dot { color: rgba(255, 255, 255, .35); margin: 0 .5em; }
   a { transition: none; }
   a.sweep .ch { animation: none; }
   .peek { animation: none; }
-  /* gentle, small motion instead of the big leaps or the zoom */
-  .saga svg, .saga svg.zoom {
+  /* gentle, small motion instead of the big leaps */
+  .saga svg {
     animation: softbob 3.6s ease-in-out infinite;
   }
 }

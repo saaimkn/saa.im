@@ -5,7 +5,7 @@ body {
   background: #0a0a0a;
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.7;
   min-height: 100svh;
   display: flex;
@@ -17,6 +17,7 @@ body {
 main {
   max-width: 520px;
   padding: 48px 24px;
+  text-align: center;
 }
 
 .sign { color: rgba(255, 255, 255, .55); }
@@ -59,6 +60,44 @@ a.sweep .ch {
 .i-ggb { height: 12px; vertical-align: -1px; }
 .icon-pair { white-space: nowrap; }
 
+/* ---- saga: a little blob character that peeks up, climbs, and bounces ---- */
+.saga { white-space: nowrap; }
+.saga svg {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: .08em;
+  vertical-align: -0.4em;
+  transform-origin: 50% 100%;   /* squash/stretch grows from its feet */
+  animation: climb 1.9s cubic-bezier(.34, 1.56, .64, 1) .4s both,
+             idlehop 5s ease-in-out 2.6s infinite;
+}
+.saga:hover svg, .saga:focus-within svg { animation: hop .6s ease-in-out; }
+
+/* peek up from hiding, climb, overshoot, squash-land, settle */
+@keyframes climb {
+  0%   { transform: translateY(65%) scale(0);              opacity: 0; }
+  25%  { transform: translateY(28%) scale(.5);             opacity: 1; }  /* slow peek */
+  55%  { transform: translateY(-20%) scaleX(.84) scaleY(1.22); }          /* leap + stretch */
+  72%  { transform: translateY(6%)  scaleX(1.2)  scaleY(.8); }            /* land + squash */
+  86%  { transform: translateY(-5%) scaleX(.96) scaleY(1.06); }           /* little rebound */
+  100% { transform: translateY(0)   scale(1); }
+}
+/* barely-there idle breathing so the character feels alive */
+@keyframes idlehop {
+  0%, 82%, 100% { transform: translateY(0) scale(1); }
+  88% { transform: translateY(-16%) scaleX(.94) scaleY(1.08); }
+  94% { transform: translateY(0)    scaleX(1.06) scaleY(.94); }
+}
+/* playful jump on hover/tap: anticipation, leap, squash, settle */
+@keyframes hop {
+  0%   { transform: translateY(0)   scale(1); }
+  18%  { transform: translateY(8%)  scaleX(1.18) scaleY(.82); }   /* crouch */
+  48%  { transform: translateY(-45%) scaleX(.82) scaleY(1.22); }  /* leap */
+  70%  { transform: translateY(5%)  scaleX(1.16) scaleY(.86); }   /* land */
+  86%  { transform: translateY(-6%) scaleX(.97) scaleY(1.05); }
+  100% { transform: translateY(0)   scale(1); }
+}
+
 footer {
   margin-top: 40px;
   font-size: 13px;
@@ -70,4 +109,5 @@ footer .dot { color: rgba(255, 255, 255, .35); margin: 0 .5em; }
 @media (prefers-reduced-motion: reduce) {
   a { transition: none; }
   a.sweep .ch { animation: none; }
+  .saga svg, .saga:hover svg, .saga:focus-within svg { animation: none; }
 }

@@ -79,10 +79,11 @@ a.sweep .ch {
   transform-origin: 50% 100%;          /* idle bounce grows from its feet */
   animation: idlehop 3.4s ease-in-out 2.5s infinite;
 }
-/* hover/tap: the little guy zooms around the screen, looping back home */
-.saga:hover svg, .saga:focus-within svg {
+/* hover/tap triggers ONE ~4.5s trip around the screen (script adds .zoom).
+   it runs to completion even after the pointer leaves, then settles home */
+.saga svg.zoom {
   transform-origin: 50% 50%;
-  animation: zoomaround 2.6s ease-in-out infinite;
+  animation: zoomaround 4.5s ease-in-out;
 }
 
 /* peek up from hiding, climb, overshoot, squash-land, settle (runs once) */
@@ -128,7 +129,7 @@ footer .dot { color: rgba(255, 255, 255, .35); margin: 0 .5em; }
   a.sweep .ch { animation: none; }
   .peek { animation: none; }
   /* gentle, small motion instead of the big leaps or the zoom */
-  .saga svg, .saga:hover svg, .saga:focus-within svg {
+  .saga svg, .saga svg.zoom {
     animation: softbob 3.6s ease-in-out infinite;
   }
 }

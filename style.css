@@ -69,7 +69,7 @@ a.sweep .ch {
   vertical-align: -0.4em;
   transform-origin: 50% 100%;   /* squash/stretch grows from its feet */
   animation: climb 1.9s cubic-bezier(.34, 1.56, .64, 1) .4s both,
-             idlehop 5s ease-in-out 2.6s infinite;
+             idlehop 3.4s ease-in-out 2.5s infinite;
 }
 .saga:hover svg, .saga:focus-within svg { animation: hop .6s ease-in-out; }
 
@@ -82,11 +82,13 @@ a.sweep .ch {
   86%  { transform: translateY(-5%) scaleX(.96) scaleY(1.06); }           /* little rebound */
   100% { transform: translateY(0)   scale(1); }
 }
-/* barely-there idle breathing so the character feels alive */
+/* a clear, repeating little hop so the character always feels alive */
 @keyframes idlehop {
-  0%, 82%, 100% { transform: translateY(0) scale(1); }
-  88% { transform: translateY(-16%) scaleX(.94) scaleY(1.08); }
-  94% { transform: translateY(0)    scaleX(1.06) scaleY(.94); }
+  0%, 62%, 100% { transform: translateY(0) scale(1); }
+  70% { transform: translateY(7%)  scaleX(1.12) scaleY(.88); }  /* crouch */
+  82% { transform: translateY(-34%) scaleX(.9)  scaleY(1.12); } /* hop up */
+  90% { transform: translateY(4%)  scaleX(1.08) scaleY(.92); }  /* land */
+  96% { transform: translateY(-3%) scale(1.02); }
 }
 /* playful jump on hover/tap: anticipation, leap, squash, settle */
 @keyframes hop {
@@ -109,5 +111,12 @@ footer .dot { color: rgba(255, 255, 255, .35); margin: 0 .5em; }
 @media (prefers-reduced-motion: reduce) {
   a { transition: none; }
   a.sweep .ch { animation: none; }
-  .saga svg, .saga:hover svg, .saga:focus-within svg { animation: none; }
+  /* gentle, small motion instead of the big leaps */
+  .saga svg, .saga:hover svg, .saga:focus-within svg {
+    animation: softbob 3.6s ease-in-out infinite;
+  }
+}
+@keyframes softbob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9%); }
 }
